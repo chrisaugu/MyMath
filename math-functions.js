@@ -1,6 +1,6 @@
 /**
  * (c) Copyright Christian Augustyn.
- * Math functions
+ * Basic math functions
  */
 
 function Point(x, y) {
