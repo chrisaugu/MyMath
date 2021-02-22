@@ -1,3 +1,26 @@
+/**
+ * (c) Copyright Christian Augustyn.
+ * Math functions
+ */
+
+function Point(x, y) {
+	this.x = x;
+	this.y = y;
+    this.setX = (x) => {this.x = x};
+    this.setY = (y) => {this.y = y};
+    this.getX = () => { return this.x};
+    this.getY = () => { return this.y};
+}
+
+function Line() {
+	this.p1 = new Point();
+	this.p2 = new Point();
+    this.setP1 = (p) => {this.p1 = p};
+    this.setP2 = (p) => {this.p2 = p};
+    this.getP1 = () => {return this.p1};
+    this.getP2 = () => {return this.p2};
+}
+
 function dot(multicand, multiplier) {
 	var el=[0,0,0];
 	for (var i=0; i<multicand.length; ++i) {
@@ -9,39 +32,31 @@ function dot(multicand, multiplier) {
 };
 
 function calculateTurningPoint() {
-	return {
-		x: '',
-		y: ''
-	}
+	this.x = 0;
+	this.y = 0;
 };
 
 function xCoordinates() {
-	return {
-		x: '',
-		y: 0
-	}
+	return new Point(0, 0);
 };
 
 function yCoordinates() {
-	return {
-		x: 0,
-		y: ''
-	}
+	return new Point(0, 0);
 };
 
 function calculatePointOfIntersectioon() {
-	return {
-		x: '',
-		y: ''
-	}
+	this.x = "";
+	this.y = "";
 };
 
 function isPerpendicular(p1, p2) {
 	return -1 === (calculateGradient(p1, p2) * calculateGradient(p2, p1));
 };
 
-function isParallel(){
-	if (true) {
+function isParallel(line1, line2){
+	var m1 = calculateGradient(line1.p1, line1.p2);
+	var m2 = calculateGradient(line2.p1, line2.p2);
+	if (m1 == m2) {
 		return true;
 	}
 	return false;
@@ -71,15 +86,15 @@ function constructEquation(e) {
 };
 
 function calculateGradient(p1, p2) {
-	let m = (p2[1]-p1[1]) / (p2[0]-p1[0]);
+	let m = (p2.y - p1.y) / (p2.x - p1.x);
 	return m;
 };
 
 function calculateDistance(p1, p2) {
-	let x1 = p1[0];
-	let y1 = p1[1];
-	let x2 = p2[0];
-	let y2 = p2[1];
+	let x1 = p1.x;
+	let y1 = p1.y;
+	let x2 = p2.x;
+	let y2 = p2.y;
 	// let d = Math.sqrt(Math.pow((x2-x1), 2) + Math.pow((y2-y1), 2));
 	let d = pythagoreanTheorem((x2-x1), (y2-y1));
 	return d;
@@ -91,15 +106,15 @@ function pythagoreanTheorem(x, y, z=0) {
 };
 
 function calculateMidPoint(p1, p2) {
-	let x1 = p1[0];
-	let y1 = p1[1];
-	let x2 = p2[0];
-	let y2 = p2[1];
+	let x1 = p1.x;
+	let y1 = p1.y;
+	let x2 = p2.x;
+	let y2 = p2.y;
 	let x = (x1 + x2) / 2;
 	let y = (y1 + y2) / 2;
 	return {
-		x: x,
-		y: y
+		x,
+		y
 	}
 };
 
