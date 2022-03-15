@@ -1,25 +1,7 @@
 /**
- * (c) Copyright Christian Augustyn.
- * Basic math functions
+ * Math formulars
+ * (c) 2022, Christian Augustyn
  */
-
-function Point(x, y) {
-	this.x = x;
-	this.y = y;
-    this.setX = (x) => {this.x = x};
-    this.setY = (y) => {this.y = y};
-    this.getX = () => { return this.x};
-    this.getY = () => { return this.y};
-}
-
-function Line() {
-	this.p1 = new Point();
-	this.p2 = new Point();
-    this.setP1 = (p) => {this.p1 = p};
-    this.setP2 = (p) => {this.p2 = p};
-    this.getP1 = () => {return this.p1};
-    this.getP2 = () => {return this.p2};
-}
 
 function dot(multicand, multiplier) {
 	var el=[0,0,0];
@@ -32,31 +14,39 @@ function dot(multicand, multiplier) {
 };
 
 function calculateTurningPoint() {
-	this.x = 0;
-	this.y = 0;
+	return {
+		x: '',
+		y: ''
+	}
 };
 
 function xCoordinates() {
-	return new Point(0, 0);
+	return {
+		x: '',
+		y: 0
+	}
 };
 
 function yCoordinates() {
-	return new Point(0, 0);
+	return {
+		x: 0,
+		y: ''
+	}
 };
 
 function calculatePointOfIntersectioon() {
-	this.x = "";
-	this.y = "";
+	return {
+		x: '',
+		y: ''
+	}
 };
 
 function isPerpendicular(p1, p2) {
 	return -1 === (calculateGradient(p1, p2) * calculateGradient(p2, p1));
 };
 
-function isParallel(line1, line2){
-	var m1 = calculateGradient(line1.p1, line1.p2);
-	var m2 = calculateGradient(line2.p1, line2.p2);
-	if (m1 == m2) {
+function isParallel(){
+	if (true) {
 		return true;
 	}
 	return false;
@@ -86,15 +76,15 @@ function constructEquation(e) {
 };
 
 function calculateGradient(p1, p2) {
-	let m = (p2.y - p1.y) / (p2.x - p1.x);
+	let m = (p2[1]-p1[1]) / (p2[0]-p1[0]);
 	return m;
 };
 
 function calculateDistance(p1, p2) {
-	let x1 = p1.x;
-	let y1 = p1.y;
-	let x2 = p2.x;
-	let y2 = p2.y;
+	let x1 = p1[0];
+	let y1 = p1[1];
+	let x2 = p2[0];
+	let y2 = p2[1];
 	// let d = Math.sqrt(Math.pow((x2-x1), 2) + Math.pow((y2-y1), 2));
 	let d = pythagoreanTheorem((x2-x1), (y2-y1));
 	return d;
@@ -106,20 +96,20 @@ function pythagoreanTheorem(x, y, z=0) {
 };
 
 function calculateMidPoint(p1, p2) {
-	let x1 = p1.x;
-	let y1 = p1.y;
-	let x2 = p2.x;
-	let y2 = p2.y;
+	let x1 = p1[0];
+	let y1 = p1[1];
+	let x2 = p2[0];
+	let y2 = p2[1];
 	let x = (x1 + x2) / 2;
 	let y = (y1 + y2) / 2;
 	return {
-		x,
-		y
+		x: x,
+		y: y
 	}
 };
 
 function factorial(n) {
-  return (n != 1) ? n * factorial(n - 1) : 1;
+	return (n != 1) ? n * factorial(n - 1) : 1;
 };
 // function factorial(n) {
 // 	if (n == 0) return 1;
@@ -129,15 +119,81 @@ function factorial(n) {
 // };
 
 /**
- * Used for calculating Greatest Common Denominator (GCD)
+ * Modulo function
+ * % - modular operator
  */
-function gcd(u, v) {
-	if (v == 0) {
-		return u;
-	} else {
-		return gcd(v, u % v)
-    }
+function mod(m, n) {
+	let a = m, b = n, c, r;
+	r = Math.floor(a / b);
+	c = r * b;
+	return a - c;
 };
+
+/**
+ * Used for calculating Greatest Common Denominator (GCD)
+ * using Euclid's Algorithm
+ */
+function gcd(m, n) {
+	if (n == 0) {
+		return m;
+	} else {
+		return gcd(n, m % n);
+	}
+};
+
+/**
+ * Used for calculating Least Common Denominator (LCD)
+ */
+function lcd(m, n) {}
+
+function rem(m, n) {}
+
+function gcf(m, n) {}
+
+function lcf(m, n) {} 
+
+function hcf(text1,text2){
+	var gcd=1;
+	if (text1>text2) {
+		text1=text1+text2;
+		text2=text1-text2;
+		text1=text1-text2;
+	}
+	if ((text2==(Math.round(text2/text1))*text1)) {
+		gcd=text1;
+	} else {
+		for (var i = Math.round(text1/2) ; i > 1; i=i-1) {
+			if ((text1==(Math.round(text1/i))*i)) {
+				if ((text2==(Math.round(text2/i))*i)) {
+					gcd=i; i=-1;
+				}
+			}
+		}
+	}
+	return gcd;
+}
+
+/**
+ * Lowest Common Multiple
+ * LCM(a,b) = ( a × b) / GCF(a,b)
+ */
+function lcm(t1,t2){
+  var cm=1;
+  var f=hcf(t1,t2);
+  cm=t1*t2/f;
+  return cm;
+}
+
+function findRelativelyPrimes(m) {
+	let _rel = [];
+  for (let i = 0; i < m; i++) {
+  	if (gcd(m, i) == 1) {
+  		_rel.push(i);
+  	}
+    console.log(`gcd(${m}, ${i})=${gcd(m,i)}`);
+  }
+  console.log('relatively primes of ' + m + ' = {' + _rel + '}');
+}
 
 // function deci2Bin(deci) {
 // 	var temp = [];
@@ -171,7 +227,6 @@ function dec_2_bin(dec) {
 };
 
 function dec_2_oct(dec) {
-	
 }
 
 function difference(...a) {
@@ -276,31 +331,31 @@ function numberOfEdgesOfVertex(v) {
 
 // Computes and output the result of the quadratic
 function outputRoots(a, b, c) {
-    var d = b * b - 4 * a * c;
+	var d = b * b - 4 * a * c;
 
-    // Two real roots
-    if (d > 0) {
-        var sqrtd = Math.sqrt(d);
-        console.log("There are two real roots "
-            + eval((-b + sqrtd) / (2 * a)) + " and "
-            + eval((-b - sqrtd) / (2 * a))
-            );
-    }
-    // Both roots are the same
-    else if (d == 0) {
-        console.log("There is only one distinct root "
-            + eval(-b /(2 * a))
-        );
-    }
-    // Complex conjugate roots
-    else {
-        console.log("The roots are complex"
-        + "\nThe real part is "
-        + eval(-b / (2 * a))
-        + "\nThe imaginary part is "
-        + eval(Math.sqrt(-d) /(2 * a))
-        );
-    }
+	// Two real roots
+	if (d > 0) {
+		var sqrtd = Math.sqrt(d);
+		console.log("There are two real roots "
+			+ eval((-b + sqrtd) / (2 * a)) + " and "
+			+ eval((-b - sqrtd) / (2 * a))
+			);
+	}
+	// Both roots are the same
+	else if (d == 0) {
+		console.log("There is only one distinct root "
+			+ eval(-b /(2 * a))
+		);
+	}
+	// Complex conjugate roots
+	else {
+		console.log("The roots are complex"
+		+ "\nThe real part is "
+		+ eval(-b / (2 * a))
+		+ "\nThe imaginary part is "
+		+ eval(Math.sqrt(-d) /(2 * a))
+		);
+	}
 }
 
 function matrix(array) {
@@ -323,24 +378,45 @@ function transpose(A) {
 }
 
 function __sigmoid(x) {
-    return 1 / (1 + Math.exp(-x));
+	return 1 / (1 + Math.exp(-x));
 }
 
 function train(inputs, outputs, num) {
-    for (var iteration=0; i<num; ++i) {
-        output = think(inputs);
-        error = outputs - output;
-        // adjustment = dot(inputs.T, error * output * (1-output))
-        adjustment = 0.01 * dot(matrix(inputs), error);
-        weights += adjustment;
-    }
+	for (var iteration=0; i<num; ++i) {
+		output = think(inputs);
+		error = outputs - output;
+		// adjustment = dot(inputs.T, error * output * (1-output))
+		adjustment = 0.01 * dot(matrix(inputs), error);
+		weights += adjustment;
+	}
 }
 
 function think(inputs) {
-    return __sigmoid(dot(inputs, weights))
+	return __sigmoid(dot(inputs, weights))
 }
 
 inputs = [[1,1,1],[1,0,1],[0,1,1]];
 outputs = matrix([[1,1,0]])
 train(inputs, outputs, 10000);
 console.log(think(array([1,0,0])));
+
+
+function matrix() {
+	let m = [];
+
+	this.add = function(matrix1, matrix2) {
+		
+	}
+
+	this.subtract = function(matrix1, matrix2) {
+
+	}
+
+	this.multiply = function(matrix1, matrix2) {
+		
+	}
+
+	this.divide = function(matrix1, matrix2) {
+		
+	}
+}
