@@ -2,6 +2,24 @@
  * Math formulars
  * (c) 2022, Christian Augustyn
  */
+ 
+function Point(x, y) {
+	this.x = x;
+	this.y = y;
+    this.setX = (x) => {this.x = x};
+    this.setY = (y) => {this.y = y};
+    this.getX = () => { return this.x};
+    this.getY = () => { return this.y};
+}
+
+function Line() {
+	this.p1 = new Point();
+	this.p2 = new Point();
+    this.setP1 = (p) => {this.p1 = p};
+    this.setP2 = (p) => {this.p2 = p};
+    this.getP1 = () => {return this.p1};
+    this.getP2 = () => {return this.p2};
+}
 
 function dot(multicand, multiplier) {
 	var el=[0,0,0];
