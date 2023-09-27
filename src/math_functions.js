@@ -2,7 +2,7 @@
  * Math formulars
  * (c) 2022, Christian Augustyn
  */
- 
+
 function Point(x, y) {
 	this.x = x;
 	this.y = y;

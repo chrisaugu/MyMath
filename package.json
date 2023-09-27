@@ -16,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/chrisaugu/MyMath/issues"
   },
-  "babel": {
+  "xbabel": {
     "presets": ["@babel/preset-env"]
   },
   "homepage": "https://github.com/chrisaugu/MyMath#readme",

@@ -21,7 +21,7 @@ let b = 1; // slope of line
 let y_ = (x) => a + b*x;
 
 // probabilistic model
-let y = (x) => a + b*x + e;
+let y_model = (x) => a + b*x + e;
 
 // line of means
 let B = [];
@@ -33,28 +33,28 @@ let u_ = (x) => B_[0] + B_[1]*x;
 
 // Least Squares Estimators of a and B
 let S = [];
-let b = (r, x, y) => r * (S[y] / S[x]);
-let a = _y - b*_x;
+let bb = (r, x, y) => r * (S[y] / S[x]);
+let aa = _y - bb*_x;
 
 // Least Square Error
 // let sum = 0;
 // for (let i = 0; i < y.length; i++) {
 // 	sum += (y[i] - y_[i]);
 // }
-let s = sum(y, y_, function(a, b) {
+let s = sum(y_model, y_, function(a, b) {
     return a - b;
 });
 let SSE = s**2;
 
 // Exy
-let xy = sum(x, y, function(a, b) {
+let xy = sum(x, y_model, function(a, b) {
     return a * b;
 });
 
-let Sxy = sum(x, y) - (sum(x) * sum(y)) / n;
+let Sxy = sum(x, y_model) - (sum(x) * sum(y_model)) / n;
 
 let xx = (sum(x))**2
-let Sxx = 
+let Sxx = 0;
 
 /**
  * Summation
